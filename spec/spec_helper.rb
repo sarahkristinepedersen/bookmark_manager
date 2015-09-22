@@ -1,11 +1,29 @@
 require 'capybara/rspec'
 require './app/data_mapper_setup.rb'
 require './app/app.rb'
+require 'database_cleaner'
 
 ENV['RACK_ENV'] = 'test'
 
 Capybara.app = BookmarkManager
 
+
+RSpec.configure do |config|
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+end
 
 
 # require File.join(File.dirname(__FILE__), '..', 'app/app.rb')
