@@ -6,7 +6,7 @@ feature 'Creating links' do
     visit '/links/new'
     fill_in 'url',   with: 'http://www.zombo.com/'
     fill_in 'title', with: 'This is Zombocom'
-    click_button 'Create link'
+    click_button 'Add link'
 
     expect(current_path).to eq '/links'
 
