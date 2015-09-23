@@ -1,12 +1,12 @@
-require 'capybara/rspec'
-require File.join(File.dirname(__FILE__), '..', 'app/app.rb')
+require "capybara/rspec"
 
+ENV["RACK_ENV"] = "test"
+
+require File.join(File.dirname(__FILE__), "..", "app/app.rb")
 # require './app/app.rb'
 
-ENV['RACK_ENV'] = 'test'
-
-require './app/data_mapper_setup.rb'
-require 'database_cleaner'
+require "./app/data_mapper_setup.rb"
+require "database_cleaner"
 
 
 Capybara.app = BookmarkManager
