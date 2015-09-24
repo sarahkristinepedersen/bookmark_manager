@@ -5,6 +5,8 @@ ENV["RACK_ENV"] = "test"
 require './app/app.rb'
 require "./app/data_mapper_setup.rb"
 require "database_cleaner"
+require "factory_girl"
+require "factories/users.rb"
 
 
 Capybara.app = BookmarkManager
@@ -30,6 +32,7 @@ Capybara.app = BookmarkManager
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

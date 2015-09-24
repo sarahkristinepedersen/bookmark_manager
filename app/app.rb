@@ -1,6 +1,7 @@
 require "sinatra/base"
 require 'sinatra/flash'
 
+
 # require 'data_mapper'
 require_relative "data_mapper_setup"
 require_relative "helpers"
@@ -53,12 +54,15 @@ register Sinatra::Flash
                        password_confirmation: params[:password_confirmation])
     if @user.save
       session[:user_id] = @user.id
-      redirect to("/")
+      redirect to("/links")
     else
-      flash.now[:notice] = "Password and confirmation password do not match"
+      flash.now[:errors] = @user.errors.full_messages
+      # flash.now[:notice] = "Password and confirmation password do not match"
       erb :"users/new_user"
     end
   end
+
+
 
   run! if app_file == BookmarkManager
 end
