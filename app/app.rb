@@ -62,6 +62,20 @@ register Sinatra::Flash
     end
   end
 
+  get '/sessions/new_session' do
+    erb :'sessions/new_session'
+  end
+
+  post '/sessions' do
+    user = User.authenticate(params[:email], params[:password])
+    if user
+      session[:user_id] = user.id
+      redirect to('/links')
+    else
+      flash.now[:errors] = ['The email or password is incorrect']
+      erb :'sessions/new_session'
+    end
+end
 
 
   run! if app_file == BookmarkManager

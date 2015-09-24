@@ -2,7 +2,7 @@ require "capybara/rspec"
 
 ENV["RACK_ENV"] = "test"
 
-require './app/app.rb'
+require "./app/app.rb"
 require "./app/data_mapper_setup.rb"
 require "database_cleaner"
 require "factory_girl"
